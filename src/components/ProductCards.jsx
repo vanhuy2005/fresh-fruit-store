@@ -6,7 +6,14 @@ const ProductCard = ({product}) => {
     const {currency, addToCart, removeFromCart, cartItems, navigate} = useAppContext();
 
     return product && (
-        <div className="border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-white min-w-56 max-w-56 w-full">
+        <div className="border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-white min-w-56 max-w-56 w-full relative">
+            {/* Discount Badge */}
+            {product.offerPrice && product.offerPrice < product.price && (
+                <div className='absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-medium z-10'>
+                    {Math.round((1 - product.offerPrice / product.price) * 100)}% OFF
+                </div>
+            )}
+            
             <div className="group cursor-pointer flex items-center justify-center px-2" onClick={() => navigate(`/product/${product._id}`)}>
                 <img className="group-hover:scale-105 transition max-w-26 md:max-w-36" src={product.image[0]} alt={product.name} />
             </div>
@@ -31,14 +38,14 @@ const ProductCard = ({product}) => {
                     <div>
                         {!cartItems[product._id] ? (
                             <button 
-                                className="flex items-center justify-center gap-1 bg-green-50 border border-green-200 hover:bg-green-100 transition-colors duration-200 md:w-[80px] w-[70px] h-[36px] rounded-md text-green-600 font-semibold text-sm" 
+                                className="flex items-center justify-center gap-2 bg-green-50 border border-green-200 hover:bg-green-100 transition-colors duration-200 md:w-[90px] w-[80px] h-[36px] rounded-md text-green-600 font-semibold text-sm" 
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     addToCart(product);
                                 }}
                             >
-                                <img src={assets.cart_icon} alt="cart_icon" className="w-4 h-4"/>
-                                Add
+                                <img src={assets.cart_icon} alt="cart_icon" className="w-4 h-4 flex-shrink-0"/>
+                                <span>Add</span>
                             </button>
                         ) : (
                             <div className="flex items-center justify-center gap-2 md:w-20 w-16 h-[36px] bg-green-100 border border-green-300 rounded-md select-none">
