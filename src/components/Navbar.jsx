@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { assets } from '../assets/assets.js'
 import { useAppContext } from '../context/AppContext.jsx'
+import SearchBox from './SearchBox.jsx'
 
 const Navbar = () => {
     const [open, setOpen] = React.useState(false)
@@ -24,9 +25,8 @@ const Navbar = () => {
                 <NavLink to='/products'>All Product</NavLink>
                 <NavLink to='/'>Contact</NavLink>
 
-                <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
-                    <input className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500" type="text" placeholder="Search products" />
-                    <img src={assets.search_icon} alt = 'search' className='w-4 h-4'></img>
+                <div className="hidden lg:block">
+                    <SearchBox />
                 </div>
 
                 <div onClick={()=>navigate("/cart")} className="relative cursor-pointer">
@@ -61,6 +61,11 @@ const Navbar = () => {
             {/* Mobile Menu */}
             {open && (
                 <div className="absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex flex-col items-start gap-2 px-5 text-sm md:hidden">
+                    {/* Mobile Search */}
+                    <div className="w-full mb-2">
+                        <SearchBox />
+                    </div>
+                    
                     <NavLink to="/" onClick={() => setOpen(false)} className="block">Home</NavLink>
                     <NavLink to="/products" onClick={() => setOpen(false)}>All Products</NavLink>
                     {user && (
