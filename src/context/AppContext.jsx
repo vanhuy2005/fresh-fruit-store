@@ -14,6 +14,7 @@ export const AppContextProvider = ({children}) => {
     const [showUserLogin, setShowUserLogin] = useState(false);
     const [products, setProducts] = useState([]);
     const [cartItems, setCartItems] = useState({});
+    const [searchQuery, setSearchQuery] = useState("");
     
     // Advanced spam detection with hard limits
     const [actionCounts, setActionCounts] = useState({});
@@ -264,7 +265,9 @@ export const AppContextProvider = ({children}) => {
         cartItems, 
         setCartItems,
         updateCartItem,
-        removeFromCart
+        removeFromCart,
+        searchQuery,
+        setSearchQuery
     };
 
     return (
