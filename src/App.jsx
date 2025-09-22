@@ -2,6 +2,7 @@ import React from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar.jsx'
 import Home from './pages/Home.jsx'
+import AllProducts from './pages/AllProducts.jsx'
 import Login from './components/Login.jsx'
 // import Banner from './components/Banner.jsx'
 import { Toaster } from 'react-hot-toast'
@@ -46,6 +47,7 @@ const App = () => {
       <div className={`${isSellerPath ? "": "px-6 md:px-16 lg:px-24 xl:px-32"}`}>
         <Routes>
           <Route path='/' element={<Home/>}></Route>
+          <Route path='/products' element={<AllProducts/>}></Route>
         </Routes>
       </div>
 
